@@ -52,7 +52,7 @@ $isAdmin=Session::get('isAdmin');
             }
          });
 
-         $('li').on('click', function(e) {
+         $('header li').on('click', function(e) {
             // e.stopPropagation();
             let url = $(this).children().attr('href');
             location.href = url;

@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(route('Met.Evaluate'));
+            return redirect(route('Home.Home'));
         }
 
         return $next($request);

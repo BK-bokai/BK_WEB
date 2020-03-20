@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddExecutionTimeColumnToMetEvaluateTable extends Migration
+class CreateStudentSkillTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddExecutionTimeColumnToMetEvaluateTable extends Migration
      */
     public function up()
     {
-        Schema::table('met_evaluates', function (Blueprint $table) {
-            $table->integer('Execution_Time');
+        Schema::create('studentSkill', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('skill','255');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddExecutionTimeColumnToMetEvaluateTable extends Migration
      */
     public function down()
     {
-        Schema::table('met_evaluate', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('studentSkill');
     }
 }

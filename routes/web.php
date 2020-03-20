@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect(route('login'));
+    return redirect(route('Home.Home'));
 });
 
 Route::get('/change_Path', 'change_Path_controller@index');
@@ -72,6 +72,20 @@ Route::middleware(['auth','checkAdmin'])->prefix('Member')->name('Member.')->nam
         Route::get('{member}/updatePasswordPage','MemberController@memberUpdatePwdPage')->name('UpdatePwdPage');
         Route::PUT('{member}/updatePassword','MemberController@memberUpdatePwd')->name('UpdatePwd');
     });
+});
+
+Route::prefix('Home')->name('Home.')->namespace('Home')->group(function(){
+    Route::get('/','HomeController@index')->name('Home');
+
+    Route::get('/Admin','HomeController@HomeAdmin')->name('Admin');
+    Route::post('/CheckChange','HomeController@homeCheckChange')->name('checkChange');
+    Route::put('/Update','HomeController@homeUpdate')->name('homeUpdate');
+
+    Route::post('/create/studentSkill', 'HomeController@addStudentSkill')->name('addStudentSkill');
+    Route::delete('/delete/studentSkill/{studentSkill}', 'HomeController@delStudentSkill')->name('delStudentSkill');
+
+    Route::post('/create/workSkill', 'HomeController@addWorkSkill')->name('addWorkSkill');
+    Route::delete('/workSkill/{workSkill}', 'HomeController@delWorkSkill')->name('delWorkSkill');
 });
 
 
