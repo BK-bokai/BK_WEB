@@ -126,7 +126,7 @@ a {
     padding-left: 30px;
 }
 
-@media screen and (max-width:850px) {
+@media screen and (max-width:950px) {
     .nav_item {
         display: none;
     }

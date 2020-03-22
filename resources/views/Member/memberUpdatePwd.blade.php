@@ -1,4 +1,4 @@
-@extends('Member.Layouts.master')
+@extends('Layouts.master')
 @section('title','重設密碼')
 @section('content')
 <div class="row container" style="margin-top: 10%;">

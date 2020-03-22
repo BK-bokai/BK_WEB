@@ -11,12 +11,9 @@ $isAdmin=Session::get('isAdmin');
       </div>
       <div class="nav_item">
          <ul>
-            <li><a href="{{route('Met.Evaluate')}}">任務列表</a></li>
-            <li><a href="{{route('Met.MetData')}}">資料庫管理系統</a></li>
-            @if($isAdmin)
-            <li><a href="{{route('Member.List')}}">會員管理</a></li>
-            @endif
-            <li><a href="{{route('Member.UpdatePwdPage',['member'=>$user->id])}}">修改密碼</a></li>
+            <li><a href="{{route('Home.Home')}}">ABC MART</a></li>
+            <li><a href="{{route('Met.Evaluate')}}">氣象性能評估系統</a></li>
+            <li><a href="{{route('Met.MetData')}}">氣象資料庫管理系統</a></li>
             <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>
       </div>
@@ -24,12 +21,9 @@ $isAdmin=Session::get('isAdmin');
    <div id='left_nav' class="left_nav">
       <div>
          <ul>
-            <li><a href="{{route('Met.Evaluate')}}">任務列表</a></li>
-            <li><a href="{{route('Met.MetData')}}">資料庫管理系統</a></li>
-            @if($isAdmin)
-            <li><a href="{{route('Member.List')}}">會員管理</a></li>
-            @endif
-            <li><a href="{{route('Member.UpdatePwdPage',['member'=>$user->id])}}">修改密碼</a></li>
+            <li><a href="{{route('Home.Home')}}">ABC MART</a></li>
+            <li><a href="{{route('Met.Evaluate')}}">氣象性能評估系統</a></li>
+            <li><a href="{{route('Met.MetData')}}">氣象資料庫管理系統</a></li>
             <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>
       </div>

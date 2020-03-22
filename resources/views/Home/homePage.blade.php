@@ -1,4 +1,4 @@
-@extends('Home.Layouts.master')
+@extends('Layouts.master')
 @section('title','ABC首頁')
 @section('content')
 <div class="row container">

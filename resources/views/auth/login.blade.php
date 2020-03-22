@@ -1,4 +1,4 @@
-@extends('auth.Layouts.master')
+@extends('Layouts.master')
 @section('title','會員登入')
 @section('content')
 <div class="row container login" style="margin-top: 5%;">

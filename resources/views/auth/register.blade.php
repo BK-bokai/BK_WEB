@@ -2,7 +2,7 @@
 <script src="{{ asset('js/register.js') }}" charset="utf-8"></script>
 @endsection
 
-@extends('auth.Layouts.master')
+@extends('Layouts.master')
 @section('title','會員註冊')
 
 @section('content')

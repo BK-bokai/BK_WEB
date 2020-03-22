@@ -1,5 +1,6 @@
 @php
 $isAdmin=Session::get('isAdmin');
+$isLogin=Session::get('isLogin');
 @endphp
 <header>
    <div class="menu_box">
@@ -12,7 +13,13 @@ $isAdmin=Session::get('isAdmin');
       <div class="nav_item">
          <ul>
             <li><a href="{{route('Home.Home')}}">ABC首頁</a></li>
-            <li><a href="{{route('Home.Admin')}}">ABC首頁管理</a></li>
+            <li><a href="{{route('trade')}}">購買紀錄</a></li>
+            <li><a href="{{route('Merchandise.Home')}}">商品列表</a></li>
+            @if ($isAdmin)
+            <li><a href="{{route('Merchandise.Manage')}}">商品管理</a></li>
+            <li><a href="{{route('Merchandise.Create')}}">新增商品</a></li>
+            @endif
+            <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>
       </div>
    </div>
@@ -20,7 +27,13 @@ $isAdmin=Session::get('isAdmin');
       <div>
          <ul>
             <li><a href="{{route('Home.Home')}}">ABC首頁</a></li>
-            <li><a href="{{route('Home.Admin')}}">ABC首頁管理</a></li>
+            <li><a href="{{route('trade')}}">購買紀錄</a></li>
+            <li><a href="{{route('Merchandise.Home')}}">商品列表</a></li>
+            @if ($isAdmin)
+            <li><a href="{{route('Merchandise.Manage')}}">商品管理</a></li>
+            <li><a href="{{route('Merchandise.Create')}}">新增商品</a></li>
+            @endif
+            <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>
       </div>
    </div>

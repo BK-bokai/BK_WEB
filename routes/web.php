@@ -35,12 +35,12 @@ Route::namespace('Auth')->group(function () {
 
     Route::get('/Facebook/redirect/{provider}', 'FbLoginController@redirect')->name('fbLogin');
     Route::get('/FBcallback/{provider}', 'FbLoginController@callback');
-    
-    Route::get('/auth/chengePassword','ResetPasswordController@userReset')->name('user.password.update')->middleware('auth');
+
+    Route::get('/auth/chengePassword', 'ResetPasswordController@userReset')->name('user.password.update')->middleware('auth');
     // https://192.168.1.166/php/TW_SIM_Evaluate/public/FBcallback/facebook
 });
 
-Route::middleware(['auth','checkAdmin'])->prefix('Met')->name('Met.')->group(function () {
+Route::middleware(['auth', 'checkLogin'])->prefix('Met')->name('Met.')->group(function () {
     Route::namespace('Meteorology')->group(function () {
         Route::get('/Evaluate', 'EvaluateController@index')->name('Evaluate');
         Route::get('/Evaluate/data/{Met_evaluates}', 'EvaluateController@detail')->name('detail_Evaluate');
@@ -63,29 +63,56 @@ Route::middleware(['auth','checkAdmin'])->prefix('Met')->name('Met.')->group(fun
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
-Route::middleware(['auth','checkAdmin'])->prefix('Member')->name('Member.')->namespace('Member')->group(function(){
-    Route::get('List','MemberController@index')->middleware('getOutNotAdmin')->name('List');
-    Route::middleware('checkOwn')->group(function(){
-        Route::get('{member}','MemberController@memberPage')->name('memberPage');
-        Route::POST('{member}/check','MemberController@memberCheck')->name('Check');
-        Route::PUT('{member}/Update','MemberController@memberUpdate')->name('Update');
-        Route::get('{member}/updatePasswordPage','MemberController@memberUpdatePwdPage')->name('UpdatePwdPage');
-        Route::PUT('{member}/updatePassword','MemberController@memberUpdatePwd')->name('UpdatePwd');
+Route::middleware(['auth', 'checkLogin'])->prefix('Member')->name('Member.')->namespace('Member')->group(function () {
+    Route::get('List', 'MemberController@index')->middleware('getOutNotAdmin')->name('List');
+    Route::middleware('checkOwn')->group(function () {
+        Route::get('{member}', 'MemberController@memberPage')->name('memberPage');
+        Route::POST('{member}/check', 'MemberController@memberCheck')->name('Check');
+        Route::PUT('{member}/Update', 'MemberController@memberUpdate')->name('Update');
+        Route::get('{member}/updatePasswordPage', 'MemberController@memberUpdatePwdPage')->name('UpdatePwdPage');
+        Route::PUT('{member}/updatePassword', 'MemberController@memberUpdatePwd')->name('UpdatePwd');
     });
 });
 
-Route::prefix('Home')->name('Home.')->namespace('Home')->group(function(){
-    Route::get('/','HomeController@index')->name('Home');
+Route::middleware('checkLogin')->prefix('Home')->name('Home.')->namespace('Home')->group(function () {
+    Route::get('/', 'HomeController@index')->name('Home');
 
-    Route::get('/Admin','HomeController@HomeAdmin')->name('Admin');
-    Route::post('/CheckChange','HomeController@homeCheckChange')->name('checkChange');
-    Route::put('/Update','HomeController@homeUpdate')->name('homeUpdate');
+    Route::middleware(['auth', 'getOutNotAdmin'])->prefix('Admin')->group(function () {
+        Route::get('/', 'HomeController@HomeAdmin')->name('Admin');
+        Route::post('/CheckChange', 'HomeController@homeCheckChange')->name('checkChange');
+        Route::put('/Update', 'HomeController@homeUpdate')->name('homeUpdate');
 
-    Route::post('/create/studentSkill', 'HomeController@addStudentSkill')->name('addStudentSkill');
-    Route::delete('/delete/studentSkill/{studentSkill}', 'HomeController@delStudentSkill')->name('delStudentSkill');
+        Route::post('/create/studentSkill', 'HomeController@addStudentSkill')->name('addStudentSkill');
+        Route::delete('/delete/studentSkill/{studentSkill}', 'HomeController@delStudentSkill')->name('delStudentSkill');
 
-    Route::post('/create/workSkill', 'HomeController@addWorkSkill')->name('addWorkSkill');
-    Route::delete('/workSkill/{workSkill}', 'HomeController@delWorkSkill')->name('delWorkSkill');
+        Route::post('/create/workSkill', 'HomeController@addWorkSkill')->name('addWorkSkill');
+        Route::delete('/workSkill/{workSkill}', 'HomeController@delWorkSkill')->name('delWorkSkill');
+    });
 });
 
+//商品
+Route::middleware(['auth', 'checkLogin', 'getOutNotAdmin'])->namespace('Transaction')->group(function () {
+    Route::prefix('merchandise')->name('Merchandise.')->group(function () {
 
+        Route::get('/', 'MerchandiseController@merchandiseListPage')->name('Home');
+
+        // Route::middleware('checkAdmin')->group(function () {
+            Route::get('/create', 'MerchandiseController@merchandiseCreateProcess')->name('Create');
+            Route::get('/manage', 'MerchandiseController@merchandiseManageListPage')->name('Manage');
+            //指定商品
+            Route::group(['prefix' => '{merchandise}'], function () {
+                Route::put('/', 'MerchandiseController@merchandiseItemUpdateProcess')->name('Update');
+                Route::get('/edit', 'MerchandiseController@merchandiseEditPage')->name('Edit');
+            });
+        // });
+        Route::group(['prefix' => '{Merchandise}'], function () {
+            Route::get('/', 'MerchandiseController@merchandiseItemPage')->name('Item');
+            Route::post('/buy', 'MerchandiseController@merchandiseItemBuyProcess')->middleware('auth')->name('Buy');
+        });
+    });
+
+    //交易
+    Route::middleware('auth')->group(function () {
+        Route::get('/transaction', 'TransactionController@transactionListPage')->name('trade');
+    });
+});

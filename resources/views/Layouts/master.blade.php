@@ -37,37 +37,34 @@
   <!-- font-awesom -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 
-
+  
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
-
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css"> -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  
   <!--css樣式-->
 
   <!-- <link rel="stylesheet" href="{{ asset('css/style.css') }}" charset="utf-8"> -->
   <link rel="stylesheet" href="{{ asset('css/total.css') }}" charset="utf-8">
   <link rel="stylesheet" href="{{ asset('css/menu.css') }}" charset="utf-8">
-
+  <link rel="stylesheet" href="{{ asset('css/tab.css') }}" charset="utf-8">
   <link rel="stylesheet" href="{{ asset('css/input.css') }}" charset="utf-8">
 
   <!-- <link rel="Shortcut Icon" type="image/x-icon" href="img/PBLAP_logo_small_c.png"> -->
-  <style>
-    /* nav .brand-logo {
-      font-size: 2.1rem;
-    } */
-  </style>
 
 </head>
 
 <body>
-  @include("auth.Layouts.menu")
-  <main>
+  @include("Layouts.menu")
+  <main id='main'>
     @yield("content")
   </main>
+  @include("Layouts.footer")
 </body>
 
 </html>

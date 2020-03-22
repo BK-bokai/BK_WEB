@@ -2,7 +2,7 @@
    <div class="container">
       <div class="row">
          <div class="col l6 s12">
-            <h5 class="white-text">台灣空氣品質模式數據平台</h5>
+            <h5 class="white-text">ABC MART</h5>
             <p class="grey-text text-lighten-4">XXXXXXXXX</p>
             © <?php echo date("Y") ?> XXXXXXX
          </div>

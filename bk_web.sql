@@ -80,6 +80,33 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `merchandise`
+--
+
+CREATE TABLE `merchandise` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `status` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'C',
+  `name` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `introduction` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `introduction_en` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` int(11) NOT NULL DEFAULT 0,
+  `remain_count` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `merchandise`
+--
+
+INSERT INTO `merchandise` (`id`, `status`, `name`, `name_en`, `introduction`, `introduction_en`, `photo`, `price`, `remain_count`, `created_at`, `updated_at`) VALUES
+(1, 'S', 'snoopy', 'snoopy', 'rewr', 'ewrwer', 'imageMerchandise\\tree-sea-grass-nature-451855.jpeg', 100, 100, '2020-03-22 12:02:25', '2020-03-22 13:47:17');
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `met_evaluates`
 --
 
@@ -2506,7 +2533,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (78, '2020_01_13_111921_add__execution_time_column_to_met_evaluate_table', 15),
 (79, '2020_03_20_110517_create__home_table', 16),
 (80, '2020_03_20_111406_create_student_skill_table', 16),
-(81, '2020_03_20_111422_create_work_skill_table', 16);
+(81, '2020_03_20_111422_create_work_skill_table', 16),
+(82, '2020_03_22_105922_create_merchandise_table', 17),
+(83, '2020_03_22_110215_create_transaction_table', 17);
 
 -- --------------------------------------------------------
 
@@ -2561,6 +2590,23 @@ CREATE TABLE `test` (
 
 INSERT INTO `test` (`ID`, `Time_Period`, `Finish`, `Create_at`) VALUES
 (7, '2019-06-01_2016-06-30', 'test', '2019-12-30 15:53:53');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `merchandise_id` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `buy_count` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2642,6 +2688,13 @@ ALTER TABLE `jobs`
   ADD KEY `jobs_queue_index` (`queue`);
 
 --
+-- 資料表索引 `merchandise`
+--
+ALTER TABLE `merchandise`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `merchandise_status_idx` (`status`);
+
+--
 -- 資料表索引 `met_evaluates`
 --
 ALTER TABLE `met_evaluates`
@@ -2711,6 +2764,13 @@ ALTER TABLE `test`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- 資料表索引 `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_transaction_idx` (`user_id`);
+
+--
 -- 資料表索引 `users`
 --
 ALTER TABLE `users`
@@ -2743,6 +2803,12 @@ ALTER TABLE `home`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
+--
+ALTER TABLE `merchandise`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `met_evaluates`
@@ -2790,19 +2856,25 @@ ALTER TABLE `met_simdata_ws`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `studentskill`
 --
 ALTER TABLE `studentskill`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `test`
 --
 ALTER TABLE `test`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `users`
@@ -2814,7 +2886,7 @@ ALTER TABLE `users`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `workskill`
 --
 ALTER TABLE `workskill`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- 已傾印資料表的限制式

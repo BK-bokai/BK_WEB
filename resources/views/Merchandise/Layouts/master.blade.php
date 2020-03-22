@@ -60,11 +60,11 @@
 </head>
 
 <body>
-  @include("Home.Layouts.menu")
-  <main id='main' class="red lighten-5">
+  @include("Merchandise.Layouts.menu")
+  <main id='main'>
     @yield("content")
   </main>
-  @include("Home.Layouts.footer")
+  @include("Merchandise.Layouts.footer")
 </body>
 
 </html>

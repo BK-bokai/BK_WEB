@@ -1,4 +1,4 @@
-@extends('Member.Layouts.master')
+@extends('Layouts.master')
 @section('title','會員管理')
 @section('content')
 <script src="{{ asset('js/member.js') }}" charset="utf-8"></script>
