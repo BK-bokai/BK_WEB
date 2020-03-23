@@ -91,12 +91,12 @@ Route::middleware('checkLogin')->prefix('Home')->name('Home.')->namespace('Home'
 });
 
 //商品
-Route::middleware(['auth', 'checkLogin', 'getOutNotAdmin'])->namespace('Transaction')->group(function () {
+Route::middleware(['auth', 'checkLogin'])->namespace('Transaction')->group(function () {
     Route::prefix('merchandise')->name('Merchandise.')->group(function () {
 
         Route::get('/', 'MerchandiseController@merchandiseListPage')->name('Home');
 
-        // Route::middleware('checkAdmin')->group(function () {
+        Route::middleware('getOutNotAdmin')->group(function(){
             Route::get('/create', 'MerchandiseController@merchandiseCreateProcess')->name('Create');
             Route::get('/manage', 'MerchandiseController@merchandiseManageListPage')->name('Manage');
             //指定商品
@@ -104,7 +104,8 @@ Route::middleware(['auth', 'checkLogin', 'getOutNotAdmin'])->namespace('Transact
                 Route::put('/', 'MerchandiseController@merchandiseItemUpdateProcess')->name('Update');
                 Route::get('/edit', 'MerchandiseController@merchandiseEditPage')->name('Edit');
             });
-        // });
+        });
+
         Route::group(['prefix' => '{Merchandise}'], function () {
             Route::get('/', 'MerchandiseController@merchandiseItemPage')->name('Item');
             Route::post('/buy', 'MerchandiseController@merchandiseItemBuyProcess')->middleware('auth')->name('Buy');
