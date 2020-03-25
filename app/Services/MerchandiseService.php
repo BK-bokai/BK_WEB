@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class MerchandiseService
 {
-    public function validator(array $data)
+    public function createValidator(array $data)
     {
         //驗證規則
         $rules = [
@@ -104,9 +104,23 @@ class MerchandiseService
             Log::notice('新圖片路徑 = ' . $photoPath);
             $msg = [
                 'status' => True,
-                'Path' =>$photoRelativePath
+                'Path' => $photoRelativePath
             ];
         }
         return  $msg;
+    }
+
+    public function buyValidator(array $data)
+    {
+        //驗證規則
+        $rules = [
+            //商品購買數量
+            'buy_count' => [
+                'required',
+                'integer',
+                'min:1',
+            ],
+        ];
+        return Validator::make($data, $rules);
     }
 }

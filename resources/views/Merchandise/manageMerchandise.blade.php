@@ -29,7 +29,7 @@
                 <td>{{ $Merchandise->id }}</td>
                 <td>{{ $Merchandise->name }}</td>
                 <td>
-                    <img class="img_show" src="{{ $Merchandise->photo ?? asset('images/default-merchandise.jpg')}}" />
+                    <img class="img_show" src="{{ $Merchandise->photo ?? asset('imageMerchandise/default-merchandise.jpg')}}" />
                 </td>
                 <td>
                     @if($Merchandise->status == 'C')

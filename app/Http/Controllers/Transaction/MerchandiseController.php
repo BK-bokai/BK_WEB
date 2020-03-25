@@ -25,14 +25,30 @@ class MerchandiseController extends Controller
         $MerchandisePaginate = Merchandise::OrderBy('created_at', 'desc')->where('status', 'S')->paginate($rowPerPage);
         if (!is_null($MerchandisePaginate)) {
             foreach ($MerchandisePaginate as $Merchandise) {
-                if (!is_null($Merchandise)) {
+                if (!is_null($Merchandise->photo)) {
                     $Merchandise->photo = url($Merchandise->photo);
                 }
             }
         }
-        return view('merchandise.listMerchandise', compact('MerchandisePaginate', 'user'));
+        return view('Merchandise.listMerchandise', compact('MerchandisePaginate', 'user'));
     }
 
+    public function merchandiseManageListPage()
+    {
+        $user = Auth::user();
+        //每頁資料量
+        $rowPerPage = 10;
+        //撈取商品分頁資料
+        $MerchandisePaginate = Merchandise::OrderBy('created_at', 'desc')->paginate($rowPerPage);
+        //設定商品圖片網址
+        foreach ($MerchandisePaginate as $Merchandise) {
+            if (!is_null($Merchandise->photo)) {
+                //設定商品圖片網址
+                $Merchandise->photo = url($Merchandise->photo);
+            }
+        }
+        return view('Merchandise.manageMerchandise', compact('MerchandisePaginate', 'user'));
+    }
     public function merchandiseCreateProcess(Request $request)
     {
         //建立商品基本資訊
@@ -50,26 +66,12 @@ class MerchandiseController extends Controller
         return redirect(route('Merchandise.Edit', ['merchandise' => $Merchandise->id]));
     }
 
-    public function merchandiseManageListPage()
-    {
-        //每頁資料量
-        $rowPerPage = 10;
-        //撈取商品分頁資料
-        $MerchandisePaginate = Merchandise::OrderBy('created_at', 'desc')->paginate($rowPerPage);
-        //設定商品圖片網址
-        foreach ($MerchandisePaginate as $Merchandise) {
-            if (!is_null($Merchandise->photo)) {
-                //設定商品圖片網址
-                $Merchandise->photo = url($Merchandise->photo);
-            }
-        }
-        return view('Merchandise.manageMerchandise', compact('MerchandisePaginate'));
-    }
+
 
     public function merchandiseItemUpdateProcess(Request $request, Merchandise $merchandise)
     {
         $input = $request->all();
-        $this->MerchandiseService->validator($input)->validate();
+        $this->MerchandiseService->createValidator($input)->validate();
         // return $input;
         if ($request->hasFile('photo')) {
             //有上傳圖片
@@ -95,13 +97,74 @@ class MerchandiseController extends Controller
         return view('merchandise.editMerchandise', compact('merchandise', 'user'));
     }
 
-    public function merchandiseItemPage()
+    public function merchandiseItemPage(Request $request, Merchandise $Merchandise)
     {
-        return 103;
+        if (!is_null($Merchandise->photo)) {
+            $Merchandise->photo = url($Merchandise->photo);
+        }
+        return view('Merchandise.showMerchandise', compact('Merchandise'));
     }
 
-    public function merchandiseItemBuyProcess()
+    public function merchandiseItemBuyProcess(Request $request,Merchandise $Merchandise)
     {
-        return 104;
+        //接收輸入資料
+        $input = request()->all();
+        $this->MerchandiseService->buyValidator($input)->validate();
+
+
+        // //驗證規則
+        // $validator = Validator::make($input, $rules);
+
+        // try {
+        //     $user = Auth::user();
+        //     //交易開始
+        //     DB::beginTransaction();
+
+        //     $buy_count = $input['buy_count'];
+        //     $remain_count_after_buy = $Merchandise->remain_count - $buy_count;
+
+        //     if ($remain_count_after_buy < 0) {
+        //         //購買後剩餘數量小於0，不足以賣給使用者
+        //         throw new Exception('商品數量不足，無法購買');
+        //     }
+        //     $Merchandise->remain_count = $remain_count_after_buy;
+        //     $Merchandise->save();
+
+        //     $total_price = $buy_count * $Merchandise->price;
+        //     $transaction_data = [
+        //         // 'user_id' => $user->id,
+        //         'merchandise_id' => $Merchandise->id,
+        //         'price' => $Merchandise->price,
+        //         'buy_count' => $buy_count,
+        //         'total_price' => $total_price,
+        //     ];
+        //     $transaction = new Transaction($transaction_data);
+        //     Auth::user()->Transaction()->save($transaction);
+        //     // return $transaction_data;
+        //     // Transaction::create($transaction_data);
+        //     // return 123;
+        //     //...中間省略
+        //     //交易結束
+        //     DB::commit();
+
+        //     return redirect(route('merchandise_item', ['Merchandise' => $Merchandise->id]))
+        //         ->with('status', '已購買成功');
+        // } catch (Exception $exception) {
+        //     //恢復原先交易狀態
+        //     DB::rollBack();
+
+        //     //回傳錯誤訊息
+        //     $error_message = [
+        //         'msg' => [
+        //             $exception->getMessage(),
+        //         ],
+        //     ];
+
+        //     return redirect()
+        //         ->back()
+        //         ->with('status', '商品數量不足，無法購買');
+        // }
+
+        var_dump($input);
     }
 }
