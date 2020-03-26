@@ -39,12 +39,17 @@
                                 @endfor
                             </select> -->
                             <div class="input-field col s12">
-                                <select name="buy_count">
+                                <select name="buyCount">
+                                    <option value="22">22</option>
                                     @for($count=0;$count<=$Merchandise->remain_count;$count++)
                                         <option value="{{ $count }}">{{ $count }}</option>
                                         @endfor
                                 </select>
                             </div>
+
+                            @error('buyCount')
+                            <p class="red-text">{{ $message }}</p>
+                            @enderror
                             <button class="btn waves-effect waves-light" type="submit">購買
                                 <i class="material-icons right">send</i>
                             </button>

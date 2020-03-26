@@ -58,4 +58,14 @@ class User extends Authenticatable
          */
         return $this->hasMany('App\Models\Met_evaluates', 'user_id', 'id');
     }
+
+    public function Transaction()
+    {
+        /**
+         * Post::class related 关联模型
+         * user_id foreignKey 当前表关联字段
+         * id localKey 关联表字段
+         */
+        return $this->hasMany('App\Models\Transaction', 'user_id', 'id');
+    }
 }

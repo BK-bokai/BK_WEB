@@ -28,8 +28,6 @@ class CreateTransactionTable extends Migration
             $table->integer('total_price');
             //時間戳記
             $table->timestamps();
-            //索引設定
-            $table->index(['user_id'], 'user_transaction_idx');
         });
     }
 

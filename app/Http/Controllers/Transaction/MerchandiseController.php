@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Merchandise;
 use Auth;
+use Exception;
+use DB;
 use Illuminate\Support\Facades\Log;
 use App\Services\MerchandiseService;
+use App\Models\Transaction;
 
 class MerchandiseController extends Controller
 {
@@ -111,60 +114,44 @@ class MerchandiseController extends Controller
         $input = request()->all();
         $this->MerchandiseService->buyValidator($input)->validate();
 
+        try {
+            //交易開始
+            DB::beginTransaction();
 
-        // //驗證規則
-        // $validator = Validator::make($input, $rules);
+            $buyCount = $input['buyCount'];
+            $remainCountAfterBuy = $Merchandise->remain_count - $buyCount;
+            if ($remainCountAfterBuy < 0) {
+                //購買後剩餘數量小於0，不足以賣給使用者
+                throw new Exception('商品數量不足，無法購買');
+            }
+            //控制金流
+            //控制金流結束
 
-        // try {
-        //     $user = Auth::user();
-        //     //交易開始
-        //     DB::beginTransaction();
+            $Merchandise->remain_count = $remainCountAfterBuy;
+            $Merchandise->save();
 
-        //     $buy_count = $input['buy_count'];
-        //     $remain_count_after_buy = $Merchandise->remain_count - $buy_count;
+            $totalPrice = $buyCount * $Merchandise->price;
+            $transaction_data = [
+                // 'user_id' => $user->id,
+                'merchandise_id' => $Merchandise->id,
+                'price' => $Merchandise->price,
+                'buy_count' => $buyCount,
+                'total_price' => $totalPrice,
+            ];
+            $transaction = new Transaction($transaction_data);
+            Auth::user()->Transaction()->save($transaction);
+            DB::commit();
 
-        //     if ($remain_count_after_buy < 0) {
-        //         //購買後剩餘數量小於0，不足以賣給使用者
-        //         throw new Exception('商品數量不足，無法購買');
-        //     }
-        //     $Merchandise->remain_count = $remain_count_after_buy;
-        //     $Merchandise->save();
+            return redirect(route('Merchandise.Item', ['Merchandise' => $Merchandise->id]))
+                ->with('status', '已購買成功');
+        } catch (Exception $exception) {
+            //恢復原先交易狀態
+            DB::rollBack();
 
-        //     $total_price = $buy_count * $Merchandise->price;
-        //     $transaction_data = [
-        //         // 'user_id' => $user->id,
-        //         'merchandise_id' => $Merchandise->id,
-        //         'price' => $Merchandise->price,
-        //         'buy_count' => $buy_count,
-        //         'total_price' => $total_price,
-        //     ];
-        //     $transaction = new Transaction($transaction_data);
-        //     Auth::user()->Transaction()->save($transaction);
-        //     // return $transaction_data;
-        //     // Transaction::create($transaction_data);
-        //     // return 123;
-        //     //...中間省略
-        //     //交易結束
-        //     DB::commit();
+            return redirect()
+                ->back()
+                ->with('status',  $exception->getMessage());
+        }
 
-        //     return redirect(route('merchandise_item', ['Merchandise' => $Merchandise->id]))
-        //         ->with('status', '已購買成功');
-        // } catch (Exception $exception) {
-        //     //恢復原先交易狀態
-        //     DB::rollBack();
-
-        //     //回傳錯誤訊息
-        //     $error_message = [
-        //         'msg' => [
-        //             $exception->getMessage(),
-        //         ],
-        //     ];
-
-        //     return redirect()
-        //         ->back()
-        //         ->with('status', '商品數量不足，無法購買');
-        // }
-
-        var_dump($input);
     }
 }

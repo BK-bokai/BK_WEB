@@ -102,7 +102,8 @@ CREATE TABLE `merchandise` (
 --
 
 INSERT INTO `merchandise` (`id`, `status`, `name`, `name_en`, `introduction`, `introduction_en`, `photo`, `price`, `remain_count`, `created_at`, `updated_at`) VALUES
-(1, 'S', 'snoopy', 'snoopy', 'rewr', 'ewrwer', 'imageMerchandise\\tree-sea-grass-nature-451855.jpeg', 100, 100, '2020-03-22 12:02:25', '2020-03-22 13:47:17');
+(1, 'S', 'snoopy', 'snoopy', 'rewr', 'ewrwer', 'imageMerchandise\\tree-sea-grass-nature-451855.jpeg', 100, 43, '2020-03-22 12:02:25', '2020-03-26 03:43:22'),
+(2, 'S', 'test', 'test', 'test', 'test', NULL, 100, 3, '2020-03-26 03:38:12', '2020-03-26 03:39:01');
 
 -- --------------------------------------------------------
 
@@ -2608,6 +2609,16 @@ CREATE TABLE `transaction` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- 傾印資料表的資料 `transaction`
+--
+
+INSERT INTO `transaction` (`id`, `user_id`, `merchandise_id`, `price`, `buy_count`, `total_price`, `created_at`, `updated_at`) VALUES
+(1, 7, 2, 100, 7, 700, '2020-03-26 03:39:01', '2020-03-26 03:39:01'),
+(2, 9, 1, 100, 10, 1000, '2020-03-26 03:41:22', '2020-03-26 03:41:22'),
+(3, 9, 1, 100, 38, 3800, '2020-03-26 03:42:48', '2020-03-26 03:42:48'),
+(4, 9, 1, 100, 9, 900, '2020-03-26 03:43:22', '2020-03-26 03:43:22');
+
 -- --------------------------------------------------------
 
 --
@@ -2808,7 +2819,7 @@ ALTER TABLE `jobs`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
 --
 ALTER TABLE `merchandise`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `met_evaluates`
@@ -2874,7 +2885,7 @@ ALTER TABLE `test`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `users`

@@ -115,7 +115,7 @@ class MerchandiseService
         //驗證規則
         $rules = [
             //商品購買數量
-            'buy_count' => [
+            'buyCount' => [
                 'required',
                 'integer',
                 'min:1',
