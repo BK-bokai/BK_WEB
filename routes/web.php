@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\Chat\ChatContorller;
+
 Route::get('/', function () {
     return redirect(route('Home.Home'));
 });
@@ -96,7 +98,7 @@ Route::middleware(['auth', 'checkLogin'])->namespace('Transaction')->group(funct
 
         Route::get('/', 'MerchandiseController@merchandiseListPage')->name('Home');
 
-        Route::middleware('getOutNotAdmin')->group(function(){
+        Route::middleware('getOutNotAdmin')->group(function () {
             Route::get('/create', 'MerchandiseController@merchandiseCreateProcess')->name('Create');
             Route::get('/manage', 'MerchandiseController@merchandiseManageListPage')->name('Manage');
             //指定商品
@@ -113,7 +115,10 @@ Route::middleware(['auth', 'checkLogin'])->namespace('Transaction')->group(funct
     });
 
     //交易
-    Route::middleware('auth')->group(function () {
-        Route::get('/transaction', 'TransactionController@transactionListPage')->name('trade');
-    });
+    Route::get('/transaction', 'TransactionController@transactionListPage')->name('trade');
+});
+
+//聊天
+Route::middleware(['auth','checkLogin'])->namespace('Chat')->prefix('Chat')->name('Chat.')->group(function(){
+    Route::get('/','ChatContorller@index')->name('index');
 });

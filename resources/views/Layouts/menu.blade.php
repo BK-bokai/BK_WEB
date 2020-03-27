@@ -19,6 +19,7 @@ $isLogin=Session::get('isLogin');
             <li><a href="{{route('register')}}">會員註冊</a></li>
             @else
             <li><a href="{{route('Met.Evaluate')}}">台灣空氣品質模式數據平台</a></li>
+            <li><a href="{{route('Chat.index')}}">聊天區</a></li>
             @if($isAdmin)
             <li><a href="{{route('Home.Admin')}}">編輯個人簡介</a></li>
             <li><a href="{{route('Member.List')}}">會員管理</a></li>
