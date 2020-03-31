@@ -121,4 +121,10 @@ Route::middleware(['auth', 'checkLogin'])->namespace('Transaction')->group(funct
 //聊天
 Route::middleware(['auth','checkLogin'])->namespace('Chat')->prefix('Chat')->name('Chat.')->group(function(){
     Route::get('/','ChatContorller@index')->name('index');
+    
+    Route::post('/post/msg','ChatContorller@post')->name('post');
+    Route::delete('/delete/{message}', 'backend\MsgController@update')->name('delMsg');
+
+    Route::post('/post/reply','ChatContorller@reply')->name('reply');
+    
 });

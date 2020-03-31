@@ -1,0 +1,21 @@
+/* div.replyNum {
+    border: 1px #9e9e9e solid;
+    margin-right: 0;
+    border-collapse: collapse;
+}*/
+
+.replyLink {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+div.showReply:hover {
+    /* border: 1px #9e9e9e solid; */
+    background-color: #9e9e9e;
+}
+
+
+/* .col.s6.replyNum {
+    border: 1px rgb(0,0,0) solid;
+} */

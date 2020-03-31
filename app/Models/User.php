@@ -68,4 +68,24 @@ class User extends Authenticatable
          */
         return $this->hasMany('App\Models\Transaction', 'user_id', 'id');
     }
+
+    public function Message()
+    {
+        /**
+         * Post::class related 关联模型
+         * user_id foreignKey 当前表关联字段
+         * id localKey 关联表字段
+         */
+        return $this->hasMany('App\Models\Message', 'user_id', 'id');
+    }
+
+    public function Reply()
+    {
+        /**
+         * Post::class related 关联模型
+         * user_id foreignKey 当前表关联字段
+         * id localKey 关联表字段
+         */
+        return $this->hasMany('App\Models\Reply', 'user_id', 'id');
+    }
 }
