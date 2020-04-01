@@ -123,8 +123,11 @@ Route::middleware(['auth','checkLogin'])->namespace('Chat')->prefix('Chat')->nam
     Route::get('/','ChatContorller@index')->name('index');
     
     Route::post('/post/msg','ChatContorller@post')->name('post');
-    Route::delete('/delete/{message}', 'backend\MsgController@update')->name('delMsg');
+    Route::delete('/delete/message/{message}', 'ChatContorller@delMsg')->name('delMsg');
+    Route::put('/put/message/{message}', 'ChatContorller@editMsg')->name('editMsg');
 
     Route::post('/post/reply','ChatContorller@reply')->name('reply');
+    Route::delete('/delete/reply/{reply}', 'ChatContorller@delreply')->name('delReply');
+    Route::put('/put/reply/{reply}', 'ChatContorller@editReply')->name('editReply');
     
 });

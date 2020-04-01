@@ -108,6 +108,28 @@ INSERT INTO `merchandise` (`id`, `status`, `name`, `name_en`, `introduction`, `i
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `messages`
+--
+
+INSERT INTO `messages` (`id`, `user_id`, `body`, `created_at`, `updated_at`) VALUES
+(1, 9, '大家好HIHIHI', '2020-03-31 02:09:59', '2020-04-01 09:31:01'),
+(5, 7, 'hihihihi', '2020-03-31 08:57:40', '2020-03-31 08:57:40');
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `met_evaluates`
 --
 
@@ -2536,7 +2558,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (80, '2020_03_20_111406_create_student_skill_table', 16),
 (81, '2020_03_20_111422_create_work_skill_table', 16),
 (82, '2020_03_22_105922_create_merchandise_table', 17),
-(83, '2020_03_22_110215_create_transaction_table', 17);
+(83, '2020_03_22_110215_create_transaction_table', 17),
+(84, '2020_03_31_091214_create_messages_table', 18),
+(85, '2020_03_31_095056_create_replies_table', 19);
 
 -- --------------------------------------------------------
 
@@ -2549,6 +2573,32 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `replies`
+--
+
+CREATE TABLE `replies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `msg_id` int(11) NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `published_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `replies`
+--
+
+INSERT INTO `replies` (`id`, `user_id`, `msg_id`, `body`, `created_at`, `updated_at`, `published_at`) VALUES
+(1, 9, 1, 'hgfhfgh耶耶', '2020-03-31 07:25:32', '2020-04-01 09:31:36', NULL),
+(2, 7, 4, 'hihih', '2020-03-31 08:54:51', '2020-03-31 08:54:51', NULL),
+(3, 7, 1, '1581515', '2020-04-01 01:02:01', '2020-04-01 01:02:01', NULL),
+(5, 9, 5, 'dddd', '2020-04-01 09:29:35', '2020-04-01 09:29:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -2706,6 +2756,13 @@ ALTER TABLE `merchandise`
   ADD KEY `merchandise_status_idx` (`status`);
 
 --
+-- 資料表索引 `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `messages_user_id_foreign` (`user_id`);
+
+--
 -- 資料表索引 `met_evaluates`
 --
 ALTER TABLE `met_evaluates`
@@ -2761,6 +2818,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- 資料表索引 `replies`
+--
+ALTER TABLE `replies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `replies_user_id_foreign` (`user_id`);
 
 --
 -- 資料表索引 `studentskill`
@@ -2822,6 +2886,12 @@ ALTER TABLE `merchandise`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `met_evaluates`
 --
 ALTER TABLE `met_evaluates`
@@ -2867,7 +2937,13 @@ ALTER TABLE `met_simdata_ws`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `replies`
+--
+ALTER TABLE `replies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `studentskill`
@@ -2904,10 +2980,22 @@ ALTER TABLE `workskill`
 --
 
 --
+-- 資料表的限制式 `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- 資料表的限制式 `met_evaluates`
 --
 ALTER TABLE `met_evaluates`
   ADD CONSTRAINT `met_evaluates_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 資料表的限制式 `replies`
+--
+ALTER TABLE `replies`
+  ADD CONSTRAINT `replies_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
