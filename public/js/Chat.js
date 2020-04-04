@@ -62,13 +62,6 @@ $(document).ready(function() {
 
     });
 
-    // $('a.editMsg').on('click', function() {
-    //     alert(222);
-    //     let msgid = $(this).attr('msgId');
-    //     let url = $(this).attr('url');
-    //     alert(msgid);
-    //     alert(url);
-    // })
 
     $('a.delReply').on('click', function() {
         let url = $(this).attr('url');
@@ -81,13 +74,7 @@ $(document).ready(function() {
         delAlert(target, targetNode, event, url, data, 'delete');
     })
 
-    // $('a.editReply').on('click', function() {
-    //     alert(444);
-    //     let msgid = $(this).attr('msgId');
-    //     let url = $(this).attr('url');
-    //     alert(msgid);
-    //     alert(url);
-    // })
+
 
     //編輯文章
     $('a.editMsg').on('click', function() {

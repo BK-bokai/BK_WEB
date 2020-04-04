@@ -64,7 +64,7 @@
   <main id='main' class="red lighten-5">
     @yield("content")
   </main>
-  @include("Meteorology.Layouts.footer")
+  @include("Layouts.footer")
 </body>
 
 </html>

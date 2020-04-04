@@ -6,6 +6,7 @@ $var_china = ['T2'=>'溫度','WS'=>'風速','WD'=>'風向'];
 
 @extends('Meteorology.Layouts.master')
 @section('title','資料庫管理系統')
+@section('metSystem', 'orange-text')
 
 @section('content')
 <style>

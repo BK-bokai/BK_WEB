@@ -11,9 +11,8 @@ $isAdmin=Session::get('isAdmin');
       </div>
       <div class="nav_item">
          <ul>
-            <li><a href="{{route('Home.Home')}}">ABC MART</a></li>
-            <li><a href="{{route('Met.Evaluate')}}">氣象性能評估系統</a></li>
-            <li><a href="{{route('Met.MetData')}}">氣象資料庫管理系統</a></li>
+            <li><a href="{{route('Met.Evaluate')}}" class="@yield('evaSystem')">氣象性能評估系統</a></li>
+            <li><a href="{{route('Met.MetData')}}" class="@yield('metSystem')">氣象資料庫管理系統</a></li>
             <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>
       </div>
@@ -21,9 +20,8 @@ $isAdmin=Session::get('isAdmin');
    <div id='left_nav' class="left_nav">
       <div>
          <ul>
-            <li><a href="{{route('Home.Home')}}">ABC MART</a></li>
-            <li><a href="{{route('Met.Evaluate')}}">氣象性能評估系統</a></li>
-            <li><a href="{{route('Met.MetData')}}">氣象資料庫管理系統</a></li>
+            <li><a href="{{route('Met.Evaluate')}}" class="@yield('evaSystem')">氣象性能評估系統</a></li>
+            <li><a href="{{route('Met.MetData')}}" class="@yield('metSystem')">氣象資料庫管理系統</a></li>
             <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>
       </div>

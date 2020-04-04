@@ -8,16 +8,15 @@ $isLogin=Session::get('isLogin');
          <a href="#"><i class="material-icons">menu</i></a>
       </div>
       <div class="logo">
-         <a href="{{route('Home.Home')}}">ABC MART</a>
+         <a href="{{route('Home.Home')}}">BK 商店</a>
       </div>
       <div class="nav_item">
          <ul>
-            <li><a href="{{route('Home.Home')}}">ABC首頁</a></li>
-            <li><a href="{{route('trade')}}">購買紀錄</a></li>
-            <li><a href="{{route('Merchandise.Home')}}">商品列表</a></li>
+            <li><a href="{{route('trade')}}" class="@yield('buyHistory')">購買紀錄</a></li>
+            <li><a href="{{route('Merchandise.Home')}}" class="@yield('merchandiseList')">商品列表</a></li>
             @if ($isAdmin)
-            <li><a href="{{route('Merchandise.Manage')}}">商品管理</a></li>
-            <li><a href="{{route('Merchandise.Create')}}">新增商品</a></li>
+            <li><a href="{{route('Merchandise.Manage')}}" class="@yield('merchandiseAdmin')">商品管理</a></li>
+            <li><a href="{{route('Merchandise.Create')}}" class="@yield('merchandiseCreate')">新增商品</a></li>
             @endif
             <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>
@@ -26,12 +25,11 @@ $isLogin=Session::get('isLogin');
    <div id='left_nav' class="left_nav">
       <div>
          <ul>
-            <li><a href="{{route('Home.Home')}}">ABC首頁</a></li>
-            <li><a href="{{route('trade')}}">購買紀錄</a></li>
-            <li><a href="{{route('Merchandise.Home')}}">商品列表</a></li>
+            <li><a href="{{route('trade')}}" class="@yield('buyHistory')">購買紀錄</a></li>
+            <li><a href="{{route('Merchandise.Home')}}" class="@yield('merchandiseList')">商品列表</a></li>
             @if ($isAdmin)
-            <li><a href="{{route('Merchandise.Manage')}}">商品管理</a></li>
-            <li><a href="{{route('Merchandise.Create')}}">新增商品</a></li>
+            <li><a href="{{route('Merchandise.Manage')}}" class="@yield('merchandiseAdmin')">商品管理</a></li>
+            <li><a href="{{route('Merchandise.Create')}}" class="@yield('merchandiseCreate')">新增商品</a></li>
             @endif
             <li><a href="{{route('Met.logout')}}">登出</a></li>
          </ul>

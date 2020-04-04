@@ -1,5 +1,6 @@
 @extends('Layouts.master')
-@section('title','ABC首頁')
+@section('title','BK WEB首頁')
+@section('home', 'orange-text')
 @section('content')
 <div class="row container">
     <div class="col s12 m6">

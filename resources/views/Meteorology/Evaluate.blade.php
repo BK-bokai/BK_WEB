@@ -7,6 +7,7 @@ $redis->connect("127.0.0.1","6379");
 
 @extends('Meteorology.Layouts.master')
 @section('title','任務清單')
+@section('evaSystem', 'orange-text')
 
 @section('content')
 <div class=" white row " style="margin-top: 0">

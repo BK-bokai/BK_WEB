@@ -64,7 +64,7 @@
   <main id='main'>
     @yield("content")
   </main>
-  @include("Merchandise.Layouts.footer")
+  @include("Layouts.footer")
 </body>
 
 </html>

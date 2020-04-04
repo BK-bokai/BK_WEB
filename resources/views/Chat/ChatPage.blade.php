@@ -1,5 +1,6 @@
 @extends('Layouts.master')
 @section('title','聊天區')
+@section('chat', 'orange-text')
 @section('content')
 <script src="{{ asset('js/Chat.js') }}" charset="utf-8"></script>
 <link rel="stylesheet" href="{{ asset('css/chat.css') }}">

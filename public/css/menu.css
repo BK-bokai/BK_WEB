@@ -48,6 +48,7 @@ a {
     color: white;
 }
 
+
 .logo {
     padding: 10px;
     flex: 1 2 auto;
@@ -80,6 +81,7 @@ a {
 .menu_icon>a:visited {
     color: white;
 }
+
 
 .menu_icon>a{
     display: flex;
@@ -125,6 +127,8 @@ a {
     display: flex;
     padding-left: 30px;
 }
+
+
 
 @media screen and (max-width:950px) {
     .nav_item {

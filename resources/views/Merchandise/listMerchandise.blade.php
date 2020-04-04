@@ -1,5 +1,6 @@
 @extends('Merchandise.Layouts.master')
 @section('title','商品列表')
+@section('merchandiseList', 'orange-text')
 @section('content')
 <script src="{{ asset('js/member.js') }}" charset="utf-8"></script>
 <style>

@@ -8,6 +8,7 @@ $area = ['north'=>'北','center'=>'中','south'=>'南','YunJia'=>'雲嘉','east'
 
 @extends('Meteorology.Layouts.master')
 @section('title','性能評估結果')
+@section('evaSystem', 'orange-text')
 
 @section('content')
 

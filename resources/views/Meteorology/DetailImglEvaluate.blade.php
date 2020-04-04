@@ -9,6 +9,7 @@ $places =['鞍部', '淡水站', '竹子湖', '基隆', '台北', '新屋', '板
 
 @extends('Meteorology.Layouts.master')
 @section('title','性能評估結果')
+@section('evaSystem', 'orange-text')
 
 @section('content')
 <style>

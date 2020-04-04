@@ -1,5 +1,6 @@
 @extends('Layouts.master')
 @section('title','重設密碼')
+@section('PwChange', 'orange-text')
 @section('content')
 <div class="row container" style="margin-top: 10%;">
    <form method="post" action="{{route('Member.UpdatePwd',['member'=>$member->id])}}" class="col s12" enctype="multipart/form-data">

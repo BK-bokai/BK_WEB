@@ -1,5 +1,6 @@
 @extends('Layouts.master')
 @section('title','ABC首頁管理系統')
+@section('homeAdmin', 'orange-text')
 @section('content')
 <script src="{{ asset('js/Home.js') }}" charset="utf-8"></script>
 

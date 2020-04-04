@@ -1,5 +1,6 @@
 @extends('Merchandise.Layouts.master')
 @section('title','商品頁')
+@section('merchandiseList', 'orange-text')
 @section('content')
 <div class="container">
     <h1>商品頁</h1>

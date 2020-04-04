@@ -40,18 +40,35 @@ class ChatContorller extends Controller
 
     public function delMsg(Request $request, Message $message)
     {
-        $message->delete();
-        return $message;
+        $user = Auth::user();
+        $msgUser = $message->user;
+        if($user == $msgUser or $user->admin){
+            $message->delete();
+            return $message;
+        }
+        else{
+            throw new \Symfony\Component\HttpKernel\Exception\HttpException(405);
+        }
+
     }
 
     public function delreply(Request $request, Reply $reply)
     {
-        $reply->delete();
-        return $reply;
+        $user = Auth::user();
+        $replyUser = $reply->user;
+        if($user == $replyUser or $user->admin){
+            $reply->delete();
+            return $reply;
+        }
+        else{
+            throw new \Symfony\Component\HttpKernel\Exception\HttpException(405);
+        }        
+
     }
 
     public function editMsg(Request $request, Message $message)
     {
+        $user = Auth::user();
         $message->body = $request->body;
         $status = $message->save();
         return ['data' => $request, 'status' => $status];
@@ -59,6 +76,7 @@ class ChatContorller extends Controller
 
     public function editReply(Request $request, Reply $reply)
     {
+        $user = Auth::user();
         $reply->body = $request->body;
         $status = $reply->save();
         return ['data' => $request, 'status' => $status];

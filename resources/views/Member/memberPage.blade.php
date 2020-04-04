@@ -1,5 +1,6 @@
 @extends('Layouts.master')
 @section('title','編輯會員')
+@section('memberAdmin', 'orange-text')
 @section('content')
 <script src="{{ asset('js/editMember.js') }}" charset="utf-8"></script>
 
