@@ -2,7 +2,7 @@
 @section('title','商品管理')
 @section('merchandiseAdmin', 'orange-text')
 @section('content')
-<script src="{{ asset('js/member.js') }}" charset="utf-8"></script>
+<script src="{{ asset('js/merchandise.js') }}" charset="utf-8"></script>
 <style>
     .img_show {
         width: 40px;
@@ -11,7 +11,7 @@
 </style>
 <div class="row container containerBody">
     <h2>商品管理</h2>
-    <table class="highlight">
+    <table class="highlight centered">
         <thead>
             <tr>
                 <th>編號</th>
@@ -20,13 +20,13 @@
                 <th>狀態</th>
                 <th>價格</th>
                 <th>剩餘數量</th>
-                <th>編輯</th>
+                <th>操作</th>
             </tr>
         </thead>
 
         <tbody>
             @foreach($MerchandisePaginate as $Merchandise)
-            <tr>
+            <tr id = "{{$Merchandise->id}}" >
                 <td>{{ $Merchandise->id }}</td>
                 <td>{{ $Merchandise->name }}</td>
                 <td>
@@ -42,8 +42,12 @@
                 <td>{{ $Merchandise->price }}</td>
                 <td>{{ $Merchandise->remain_count }}</td>
                 <td>
-                    <a href="{{route('Merchandise.Edit',['merchandise'=>$Merchandise->id])}}">
+                    <a href="{{route('Merchandise.Edit',['merchandise'=>$Merchandise->id])}}" class="green-text">
                         編輯
+                    </a>
+
+                    <a href="javascript:void(0)" MerId="{{$Merchandise->id}}" url="{{route('Merchandise.Delete',['merchandise'=>$Merchandise->id])}}" class="red-text delMerchandise">
+                        刪除
                     </a>
                 </td>
             </tr>

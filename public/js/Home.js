@@ -87,7 +87,7 @@ $(document).ready(function () {
     let url = $(this).attr('url');
     let target = $(this).parent().parent();
     target.slideUp();
-    alert(url)
+    // alert(url)
   })
 
 })

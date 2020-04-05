@@ -52,6 +52,10 @@ class MerchandiseController extends Controller
         }
         return view('Merchandise.manageMerchandise', compact('MerchandisePaginate', 'user'));
     }
+
+    public function merchandiseDelete(Request $request, Merchandise $merchandise){
+        $merchandise->delete();
+    }
     public function merchandiseCreateProcess(Request $request)
     {
         //建立商品基本資訊

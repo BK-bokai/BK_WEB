@@ -72,7 +72,7 @@ class RegisterService
             };
 
             return redirect()->back()
-                ->withInput($request->only('user', 'email', 'remember'))
+                ->withInput($request->only('name', 'email', 'remember', 'admin'))
                 ->withErrors($errors);
         };
 

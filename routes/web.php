@@ -67,6 +67,10 @@ Route::middleware(['auth', 'checkLogin'])->prefix('Met')->name('Met.')->group(fu
 
 Route::middleware(['auth', 'checkLogin'])->prefix('Member')->name('Member.')->namespace('Member')->group(function () {
     Route::get('List', 'MemberController@index')->middleware('getOutNotAdmin')->name('List');
+    Route::get('AddPage', 'MemberController@showAddPage')->middleware('getOutNotAdmin')->name('AddPage');
+    Route::post('/Create', 'MemberController@Create')->middleware('getOutNotAdmin')->name('Create');
+    Route::Delete('/delete/{member}', 'MemberController@Delete')->middleware('getOutNotAdmin')->name('Delete');
+
     Route::middleware('checkOwn')->group(function () {
         Route::get('{member}', 'MemberController@memberPage')->name('memberPage');
         Route::POST('{member}/check', 'MemberController@memberCheck')->name('Check');
@@ -105,6 +109,7 @@ Route::middleware(['auth', 'checkLogin'])->namespace('Transaction')->group(funct
             Route::group(['prefix' => '{merchandise}'], function () {
                 Route::put('/', 'MerchandiseController@merchandiseItemUpdateProcess')->name('Update');
                 Route::get('/edit', 'MerchandiseController@merchandiseEditPage')->name('Edit');
+                Route::delete('/delete', 'MerchandiseController@merchandiseDelete')->name('Delete');
             });
         });
 

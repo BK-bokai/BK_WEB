@@ -6,20 +6,60 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\MemberService;
+use App\Services\RegisterService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
     protected $MemberService;
-    public function __construct(MemberService $MemberService)
+    protected $RegisterService;
+
+    protected function createUser($data)
+    {
+        return User::create([
+            'name' => $data->name,
+            'email' => $data->email,
+            'password' => Hash::make($data->password),
+            'active' => 'active',
+            'admin'  =>  !!$data->admin,
+        ]);
+    }
+
+    public function __construct(MemberService $MemberService, RegisterService $RegisterService)
     {
         $this->MemberService = $MemberService;
+        $this->RegisterService = $RegisterService;
     }
     public function index()
     {
         $user = Auth::user();
         $members = User::all();
         return view('Member.memberList', compact('members', 'user'));
+    }
+
+    public function showAddPage(Request $request)
+    {
+        $user = Auth::user();
+        return view('Member.memberAddPage', compact('members', 'user'));
+    }
+
+    public function Create(Request $request)
+    {
+        $this->RegisterService->validator($request->all())->validate();
+        $userName    = User::where('name', $request->name)->first();
+        $userEmail   = User::where('email', $request->email)->first();
+        if ($userName != null || $userEmail != null) {
+            return $this->RegisterService->confirm($request);
+        } else {
+            event(new Registered($user = $this->createUser($request)));
+            return redirect()->route('Member.List');
+        }
+    }
+
+    public function Delete(Request $request, User $member){
+        $member->delete();
     }
 
     public function memberPage(Request $request, User $member)
@@ -62,7 +102,7 @@ class MemberController extends Controller
         $user = Auth::user();
 
         $this->MemberService->passwordValidator($request->all())->validate();
-        
+
 
         $response = $this->MemberService->resetPassword(
             $member,
@@ -71,6 +111,6 @@ class MemberController extends Controller
             //與 Hash::make($request->password); 一樣
         );
         return redirect(route('Member.UpdatePwdPage', ['member' => $member->id]))
-                ->with('status', $member->name.'的密碼已重置完畢');
+            ->with('status', $member->name . '的密碼已重置完畢');
     }
 }

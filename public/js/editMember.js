@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
   $("input[name=name],input[name=email],input[name=admin]").on('keyup change', function () {
 
     let url = $(this).attr('url');
@@ -16,7 +15,7 @@ $(document).ready(function () {
       'admin':admin,
     }
     // console.log(url);
-    // console.log(name);
+    console.log(name.length);
     // console.log(email);
     // console.log(admin);
 
@@ -32,14 +31,7 @@ $(document).ready(function () {
         console.log(data);
         console.log("ajax success");
 
-        // if (data['repeat'] > 0 || data['change'] == 0 || name.length == 0) {
-        //   $("button[type=submit]").addClass('disabled');
-        // }
-        // else {
-        //   $("button[type=submit]").removeClass('disabled');
-        // }
-
-        if (!data['canChange']) {
+        if (!data['canChange'] || name.length==0) {
           $("button[type=submit]").addClass('disabled');
         }
         else {

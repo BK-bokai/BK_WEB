@@ -37,9 +37,6 @@
                 <p class="red-text">{{ $message }}</p>
                 @enderror
             </p>
-            @error('level')
-            <p class="red-text">{{ $message }}</p>
-            @enderror
         </div>
 
         <div class="col s6">

@@ -41,7 +41,6 @@
                             </select> -->
                             <div class="input-field col s12">
                                 <select name="buyCount">
-                                    <option value="22">22</option>
                                     @for($count=0;$count<=$Merchandise->remain_count;$count++)
                                         <option value="{{ $count }}">{{ $count }}</option>
                                         @endfor

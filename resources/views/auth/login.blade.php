@@ -1,5 +1,6 @@
 @extends('Layouts.master')
 @section('title','會員登入')
+@section('login', 'orange-text')
 @section('content')
 <div class="row container login" style="margin-top: 5%;">
     <form method="post" action="{{route('do_login')}}" class="col s12 loginform" enctype="multipart/form-data">
