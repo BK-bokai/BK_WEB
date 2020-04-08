@@ -1,0 +1,10 @@
+.img_box {
+   border: 2px rgba(0, 0, 0, 1) solid;
+   /* padding: 10vh; */
+}
+
+.img_box.col.s12.m3 {
+   padding: 1.5vh;
+   margin: -1px;
+}
+

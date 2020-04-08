@@ -45,13 +45,13 @@
                 <button class="btn waves-effect waves-light test" type="submit">登入
                     <i class="material-icons right">send</i>
                 </button>
-                <h5><a href="{{ route('fbLogin',['facebook']) }}"><i class="fab fa-facebook-square"></i>使用Facebook登入</a></h5>
+                {{-- <h5><a href="{{ route('fbLogin',['facebook']) }}"><i class="fab fa-facebook-square"></i>使用Facebook登入</a></h5> --}}
 
                 <h6>忘記密碼了?</h6>
                 <h5>點選<a href="{{ route('password.request') }}">這裡</a>重置密碼</h5>
             </div>
             <!-- Switch -->
-            <div class="switch col s6">
+            {{-- <div class="switch col s6">
                 <p>記住我</p>
                 <label>
                     Off
@@ -59,7 +59,7 @@
                     <span class="lever"></span>
                     On
                 </label>
-            </div>
+            </div> --}}
         </div>
 
 

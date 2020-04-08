@@ -136,7 +136,7 @@ conn= MySQLdb.connect(
         port = 3306,
         user='bokai',
         passwd='2841p4204',
-        db ='tw_sim_evaluate',
+        db ='bk_web',
         )
 
 #通過獲取到的資料庫連線conn下的cursor()方法來建立遊標。

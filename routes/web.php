@@ -88,6 +88,11 @@ Route::middleware('checkLogin')->prefix('Home')->name('Home.')->namespace('Home'
         Route::post('/CheckChange', 'HomeController@homeCheckChange')->name('checkChange');
         Route::put('/Update', 'HomeController@homeUpdate')->name('homeUpdate');
 
+        Route::get('/Image', 'HomeImageController@showImages')->name('Image');
+        Route::post('/Create', 'HomeImageController@Create')->name('Create');
+        Route::put('/PUT/{image}', 'HomeImageController@Update')->name('Publish');
+
+
         Route::post('/create/studentSkill', 'HomeController@addStudentSkill')->name('addStudentSkill');
         Route::delete('/delete/studentSkill/{studentSkill}', 'HomeController@delStudentSkill')->name('delStudentSkill');
 

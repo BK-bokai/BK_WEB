@@ -881,6 +881,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -927,6 +928,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -1078,16 +1080,16 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "2d670d5b100ef2dc72dc578126b2b97985791f52"
+                "reference": "4bd66ee416fea04398dee5b8c32d65719a075db4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/2d670d5b100ef2dc72dc578126b2b97985791f52",
-                "reference": "2d670d5b100ef2dc72dc578126b2b97985791f52",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/4bd66ee416fea04398dee5b8c32d65719a075db4",
+                "reference": "4bd66ee416fea04398dee5b8c32d65719a075db4",
                 "shasum": ""
             },
             "require": {
@@ -1106,7 +1108,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "4.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -1138,7 +1140,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2019-11-26T17:39:15+00:00"
+            "time": "2020-02-04T15:30:01+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1337,6 +1339,7 @@
                 "markdown",
                 "table"
             ],
+            "abandoned": "league/commonmark",
             "time": "2019-09-26T13:28:33+00:00"
         },
         {
