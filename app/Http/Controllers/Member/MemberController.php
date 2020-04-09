@@ -58,9 +58,9 @@ class MemberController extends Controller
         }
     }
 
-    public function Delete(Request $request, User $member){
-        $member->delete();
-    }
+    // public function Delete(Request $request, User $member){
+    //     $member->delete();
+    // }
 
     public function memberPage(Request $request, User $member)
     {

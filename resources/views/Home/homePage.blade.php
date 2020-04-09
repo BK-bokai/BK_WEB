@@ -6,8 +6,8 @@
     <div class="col s12 m6">
         <div class="card">
             <div class="card-image">
-                <img src="{{$home->image}}">
-                <span class="card-title">ABC MART</span>
+                <img src="{{$image->image}}">
+                <span class="card-title">BK WEB</span>
             </div>
             <div class="card-content">
                 <p class="text">

@@ -14,11 +14,10 @@ class TransactionController extends Controller
         $rowPerPage = 10;
 
         $user = Auth::user();
-        // $Transation = Auth::user()->Transaction->OrderBy('created_at', 'desc')->paginate($row_per_page)->toArray();
-        // return $Transation;
         $TransactionPaginate = Transaction::where('user_id',$user->id)->OrderBy('created_at', 'desc')->paginate($rowPerPage);
         foreach ($TransactionPaginate as $Transaction) {
             // return $Transaction->Merchandise;
+            // return $Transaction->Merchandise->photo;
             if (!is_null($Transaction->Merchandise->photo)){
                 $Transaction->Merchandise->photo = url($Transaction->Merchandise->photo);
             }

@@ -89,8 +89,9 @@ Route::middleware('checkLogin')->prefix('Home')->name('Home.')->namespace('Home'
         Route::put('/Update', 'HomeController@homeUpdate')->name('homeUpdate');
 
         Route::get('/Image', 'HomeImageController@showImages')->name('Image');
-        Route::post('/Create', 'HomeImageController@Create')->name('Create');
-        Route::put('/PUT/{image}', 'HomeImageController@Update')->name('Publish');
+        Route::post('/Create/Image', 'HomeImageController@Create')->name('Create');
+        Route::put('/PUT/Image/{image}', 'HomeImageController@Update')->name('Publish');
+        Route::Delete('/DELETE/Image/{image}', 'HomeImageController@Delete')->name('delImg');
 
 
         Route::post('/create/studentSkill', 'HomeController@addStudentSkill')->name('addStudentSkill');

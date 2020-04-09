@@ -29,7 +29,7 @@ class CreateMerchandiseTable extends Migration
            //商品英文介紹
            $table->text('introduction_en');
            //商品照片
-           $table->string('photo', 50)->nullable();
+           $table->longText('photo')->nullable();
            //價格
            $table->integer('price')->default(0);
            //商品剩餘數量

@@ -15,7 +15,7 @@ class CreateHomeImagesTable extends Migration
     {
         Schema::create('homeImages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('image', 255);
+            $table->longText('image');
             $table->boolean('publish')->default(False);
             $table->timestamps();
         });

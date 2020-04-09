@@ -41,14 +41,27 @@ class HomeImageController extends Controller
         }
     }
 
-    public function Update(Request $request,homeImages $image){
-        $oldImage = homeImages::where('publish',1)->first();
-        // if(!isNull($oldImage)){
-        //     $oldImage->publish=0;
-        //     $oldImage->save();
-        // }
-        // $image->publish=1;
-        // $image->save();
-        return [$oldImage];
+    public function Update(Request $request, homeImages $image)
+    {
+        $oldImage = homeImages::where('publish', 1)->first();
+        if (!is_null($oldImage)) {
+            $oldImage->publish = 0;
+            $oldImage->save();
+        }
+        $image->publish = 1;
+        $image->save();
+        return [$image];
+    }
+
+    public function Delete(Request $request, homeImages $image)
+    {
+        if ($request->delete) {
+            // unlink(public_path() .'\\'. $image->image);
+            unlink(public_path($image->image));
+            $image->delete();
+            return '已刪除';
+        } else {
+            return '請先更改首頁相片再進行刪除';
+        }
     }
 }

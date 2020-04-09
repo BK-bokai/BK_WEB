@@ -64,6 +64,29 @@ INSERT INTO `home` (`id`, `image`, `content_1`, `content_2`, `content_3`, `conte
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `homeimages`
+--
+
+CREATE TABLE `homeimages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `publish` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `homeimages`
+--
+
+INSERT INTO `homeimages` (`id`, `image`, `publish`, `created_at`, `updated_at`) VALUES
+(3, 'imageHome\\34199865_2150077251676075_5564561033151905792_o.jpg', 0, '2020-04-09 03:21:22', '2020-04-09 08:38:44'),
+(4, 'imageHome\\13336041_1043737799041354_2768750491941662450_n.jpg', 1, '2020-04-09 04:35:30', '2020-04-09 08:38:44'),
+(5, 'imageHome\\13217463_1309714739045927_7244110299519420644_o.jpg', 0, '2020-04-09 04:35:37', '2020-04-09 04:35:37');
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `jobs`
 --
 
@@ -90,7 +113,7 @@ CREATE TABLE `merchandise` (
   `name_en` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `introduction` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `introduction_en` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` int(11) NOT NULL DEFAULT 0,
   `remain_count` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -102,8 +125,8 @@ CREATE TABLE `merchandise` (
 --
 
 INSERT INTO `merchandise` (`id`, `status`, `name`, `name_en`, `introduction`, `introduction_en`, `photo`, `price`, `remain_count`, `created_at`, `updated_at`) VALUES
-(1, 'S', 'snoopy', 'snoopy', 'rewr', 'ewrwer', 'imageMerchandise\\tree-sea-grass-nature-451855.jpeg', 100, 43, '2020-03-22 12:02:25', '2020-03-26 03:43:22'),
-(2, 'S', 'test', 'test', 'test', 'test', NULL, 100, 3, '2020-03-26 03:38:12', '2020-03-26 03:39:01');
+(1, 'S', 'snoopy', 'snoopy', 'rewr', 'ewrwer', 'imageMerchandise\\tree-sea-grass-nature-451855.jpeg', 100, 31, '2020-03-22 12:02:25', '2020-04-09 07:28:18'),
+(4, 'S', '紅燒牛雜麵', 'Braised Beef Noodles', '紅燒牛雜麵', 'Braised Beef Noodles', 'imageMerchandise\\紅燒牛肉麵.jfif', 320, 2, '2020-04-09 06:12:16', '2020-04-09 07:28:11');
 
 -- --------------------------------------------------------
 
@@ -2560,7 +2583,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (82, '2020_03_22_105922_create_merchandise_table', 17),
 (83, '2020_03_22_110215_create_transaction_table', 17),
 (84, '2020_03_31_091214_create_messages_table', 18),
-(85, '2020_03_31_095056_create_replies_table', 19);
+(85, '2020_03_31_095056_create_replies_table', 19),
+(86, '2020_04_08_220239_create_home_images_table', 20);
 
 -- --------------------------------------------------------
 
@@ -2664,10 +2688,20 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`id`, `user_id`, `merchandise_id`, `price`, `buy_count`, `total_price`, `created_at`, `updated_at`) VALUES
-(1, 7, 2, 100, 7, 700, '2020-03-26 03:39:01', '2020-03-26 03:39:01'),
 (2, 9, 1, 100, 10, 1000, '2020-03-26 03:41:22', '2020-03-26 03:41:22'),
 (3, 9, 1, 100, 38, 3800, '2020-03-26 03:42:48', '2020-03-26 03:42:48'),
-(4, 9, 1, 100, 9, 900, '2020-03-26 03:43:22', '2020-03-26 03:43:22');
+(4, 9, 1, 100, 9, 900, '2020-03-26 03:43:22', '2020-03-26 03:43:22'),
+(5, 7, 4, 320, 3, 960, '2020-04-09 06:31:35', '2020-04-09 06:31:35'),
+(6, 7, 4, 320, 1, 320, '2020-04-09 07:06:46', '2020-04-09 07:06:46'),
+(7, 7, 4, 320, 1, 320, '2020-04-09 07:07:37', '2020-04-09 07:07:37'),
+(8, 7, 4, 320, 10, 3200, '2020-04-09 07:25:47', '2020-04-09 07:25:47'),
+(9, 7, 4, 320, 7, 2240, '2020-04-09 07:26:52', '2020-04-09 07:26:52'),
+(10, 7, 1, 100, 8, 800, '2020-04-09 07:27:17', '2020-04-09 07:27:17'),
+(11, 7, 1, 100, 1, 100, '2020-04-09 07:27:39', '2020-04-09 07:27:39'),
+(12, 7, 1, 100, 1, 100, '2020-04-09 07:27:46', '2020-04-09 07:27:46'),
+(13, 7, 1, 100, 1, 100, '2020-04-09 07:27:55', '2020-04-09 07:27:55'),
+(14, 7, 4, 320, 1, 320, '2020-04-09 07:28:11', '2020-04-09 07:28:11'),
+(15, 7, 1, 100, 1, 100, '2020-04-09 07:28:18', '2020-04-09 07:28:18');
 
 -- --------------------------------------------------------
 
@@ -2739,6 +2773,12 @@ ALTER TABLE `failed_jobs`
 -- 資料表索引 `home`
 --
 ALTER TABLE `home`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `homeimages`
+--
+ALTER TABLE `homeimages`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2874,6 +2914,12 @@ ALTER TABLE `home`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `homeimages`
+--
+ALTER TABLE `homeimages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `jobs`
 --
 ALTER TABLE `jobs`
@@ -2883,7 +2929,7 @@ ALTER TABLE `jobs`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
 --
 ALTER TABLE `merchandise`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `messages`
@@ -2937,7 +2983,7 @@ ALTER TABLE `met_simdata_ws`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `replies`
@@ -2961,7 +3007,7 @@ ALTER TABLE `test`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `users`

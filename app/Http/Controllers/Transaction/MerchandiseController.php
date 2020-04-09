@@ -54,6 +54,9 @@ class MerchandiseController extends Controller
     }
 
     public function merchandiseDelete(Request $request, Merchandise $merchandise){
+        if(!is_null($merchandise->photo)){
+            unlink(public_path($merchandise->photo));
+        }
         $merchandise->delete();
     }
     public function merchandiseCreateProcess(Request $request)
@@ -146,8 +149,9 @@ class MerchandiseController extends Controller
             Auth::user()->Transaction()->save($transaction);
             DB::commit();
 
-            return redirect(route('Merchandise.Item', ['Merchandise' => $Merchandise->id]))
-                ->with('status', '已購買成功');
+            // return redirect(route('Merchandise.Item', ['Merchandise' => $Merchandise->id]))
+            //     ->with('status', '已購買成功');
+            return redirect()->route('trade');
         } catch (Exception $exception) {
             //恢復原先交易狀態
             DB::rollBack();

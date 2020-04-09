@@ -45,10 +45,10 @@
                     <a href="{{route('Merchandise.Edit',['merchandise'=>$Merchandise->id])}}" class="green-text">
                         編輯
                     </a>
-
+<!-- 
                     <a href="javascript:void(0)" MerId="{{$Merchandise->id}}" url="{{route('Merchandise.Delete',['merchandise'=>$Merchandise->id])}}" class="red-text delMerchandise">
                         刪除
-                    </a>
+                    </a> -->
                 </td>
             </tr>
             @endforeach
