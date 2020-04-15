@@ -80,7 +80,7 @@ $var_china = ['T2'=>'溫度','WS'=>'風速','WD'=>'風向'];
             <div class="row ">
                 @if (count($datas) !== 0)
                 <div class="col s12 card">
-                    <table class="highlight">
+                    <table class="highlight responsive-table">
                         <thead>
                             <tr>
                                 <th></th>

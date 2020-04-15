@@ -2,6 +2,30 @@
 @section('title','商品頁')
 @section('merchandiseList', 'orange-text')
 @section('content')
+<!-- <script src="{{ asset('js/select.js') }}" charset="utf-8"></script> -->
+<link rel="stylesheet" href="{{ asset('css/select.css') }}">
+<style>
+    .dropdown-content .close {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        text-align: right;
+        padding-right: .75rem;
+        padding-top: .75rem;
+        height: 0px;
+        cursor: pointer;
+    }
+
+    .dropdown-content .search {
+        margin-left: .75rem;
+        margin-right: .75rem;
+    }
+
+    .dropdown-content .search-input {
+        margin-bottom: 5px;
+        line-height: 3rem;
+    }
+</style>
 <div class="container">
     <h1>商品頁</h1>
     <p class="teal-text"> {{ session('status') }}</p>
@@ -61,6 +85,7 @@
 
 <script>
     $(document).ready(function() {
+        $('select').formSelect();
         $('.butBtn').on('click', function(e) {
             e.preventDefault();
             let name = $('.name').text();

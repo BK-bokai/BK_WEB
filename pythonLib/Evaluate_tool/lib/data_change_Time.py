@@ -47,7 +47,10 @@ def data_change_Time(obsdata, simdata, workdir, start, end):
     print('Processing data_change_Time')
     obs = pd.read_excel(workdir+'\\'+obsdata)
     sim = pd.read_excel(workdir+'\\'+simdata)
-
+    header=[]
+    for i in sim:
+        header.append(i)
+    sim = sim.values.tolist()
     new_time_obsdate = 'new_time_'+obsdata
     new_time_simdate = 'new_time_'+simdata
 
@@ -73,10 +76,12 @@ def data_change_Time(obsdata, simdata, workdir, start, end):
     #     sim.to_excel(workdir+'\\'+new_time_simdate, index=False)
 
 
-    for i in range(0, len(sim['UTC'])):
+    for i in range(0, len(sim)):
         # 取出檔案內的時間，透過datetime轉換成時間格式再加8小時
-        sim['UTC'][i] = (datetime.datetime.strptime(sim['UTC'][i][11:24], '%Y-%m-%d_%H')).strftime('%Y-%m-%d-%H')
+        # sim['UTC'][i] = (datetime.datetime.strptime(sim['UTC'][i][11:24], '%Y-%m-%d_%H')).strftime('%Y-%m-%d-%H')
+        sim[i][0] = (datetime.datetime.strptime(sim[i][0][11:24], '%Y-%m-%d_%H')).strftime('%Y-%m-%d-%H')
 
+    sim = pd.DataFrame(sim,columns=header)
     obs[obs["UTC"].between(start+'-00',end+'-23')].to_excel(workdir+'\\'+new_time_obsdate, index=False)
     sim[sim["UTC"].between(start+'-00',end+'-23')].to_excel(workdir+'\\'+new_time_simdate, index=False)
 
