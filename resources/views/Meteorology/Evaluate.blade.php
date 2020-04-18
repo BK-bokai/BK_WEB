@@ -19,9 +19,12 @@ $redis->connect("127.0.0.1","6379");
                 <tr>
                     <td>
                         <label>
-                            <select name='year'>
+                            <!-- <select name='year'>
                                 @for ($year = 2016; $year <= (int)date("Y"); $year++) <option value="{{$year}}">{{$year}}</option>
                                     @endfor
+                            </select> -->
+                            <select name='year'>
+                            <option value="2016">2016</option>
                             </select>
                             <span>請選擇年分</span>
                         </label>

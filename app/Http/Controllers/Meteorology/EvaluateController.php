@@ -88,7 +88,7 @@ class EvaluateController extends Controller
             $this->EvaluateService->Met_Evaluate($now, $start, $end, $rootdir);
             $period = ((int) substr($end, 5, 2) - (int) substr($start, 5, 2)) + 1; #經過幾個月
             $path = "\MetData\Evaluate\\" . $now . '_' . $start . "-" . $end . "\\Result\\" . $start . '_' . $end . '_evaluate.xlsx';
-            $Execution_Time = 150;
+            $Execution_Time = 300;
             $Evaluate_task = new Met_evaluates([
                 'Time_Period' => $start . '_' . $end,
                 'Path' => $path,
